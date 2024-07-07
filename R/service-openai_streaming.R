@@ -97,7 +97,7 @@ OpenaiStreamParser <- R6::R6Class( # nolint
 
       json_list <- strsplit(parsed_event$data, "(?<=})\\s*(?=\\{)", perl = TRUE)[[1]]
       json_objects <- lapply(json_list, fromJSON)
-      parsed_event$data  <- toJSON(json_objects, pretty = TRUE, auto_unbox = TRUE)
+      parsed_event$data  <- jsonlite::toJSON(json_objects)
       parsed_event$data <- jsonlite::fromJSON(parsed_event$data, simplifyDataFrame = TRUE)
 
       content <- paste0(unlist(lapply(parsed_event$data$choices, function(x) x$delta$content)), collapse = "")
