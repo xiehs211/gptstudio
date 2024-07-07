@@ -108,7 +108,7 @@ OpenaiStreamParser <- R6::R6Class( # nolint
       json_objects <- Filter(Negate(is.null), json_objects)
       data <- jsonlite::toJSON(json_objects)
       parsed_event$data <- jsonlite::fromJSON(data, simplifyDataFrame = TRUE)
-      content <- paste0(unlist(lapply(data$choices, function(x) x$delta$content)), collapse = "")
+      content <- paste0(unlist(lapply(parsed_event$data$choices, function(x) x$delta$content)), collapse = "")
 
       self$value <- paste0(self$value, content)
 
