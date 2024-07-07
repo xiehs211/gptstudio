@@ -95,12 +95,12 @@ OpenaiStreamParser <- R6::R6Class( # nolint
         return()
       }
 
-      json_list <- strsplit(parsed_event$data, "(?<=})\\s*(?=\\{)", perl = TRUE)[[1]]
-      json_objects <- lapply(json_list, fromJSON)
-      parsed_event$data  <- jsonlite::toJSON(json_objects)
-      parsed_event$data <- jsonlite::fromJSON(parsed_event$data, simplifyDataFrame = TRUE)
+      #json_list <- strsplit(parsed_event$data, "(?<=})\\s*(?=\\{)", perl = TRUE)[[1]]
+      #json_objects <- lapply(json_list, fromJSON)
+      #parsed_event$data  <- jsonlite::toJSON(json_objects)
+      # parsed_event$data <- jsonlite::fromJSON(parsed_event$data, simplifyDataFrame = FALSE)
 
-      content <- paste0(unlist(lapply(parsed_event$data$choices, function(x) x$delta$content)), collapse = "")
+      content <- parsed_event$data
       self$value <- paste0(self$value, content)
 
       if (!is.null(self$shinySession)) {
