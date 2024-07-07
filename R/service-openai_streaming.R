@@ -94,9 +94,10 @@ OpenaiStreamParser <- R6::R6Class( # nolint
       if (is.null(parsed_event$data) || parsed_event$data == "[DONE]") {
         return()
       }
-      parsed_event$data <- jsonlite::fromJSON(parsed_event$data, simplifyDataFrame = FALSE)
+      #parsed_event$data <- jsonlite::fromJSON(parsed_event$data, simplifyDataFrame = FALSE)
 
-      content <- parsed_event$data$choices[[1]]$delta$content
+      #content <- parsed_event$data$choices[[1]]$delta$content
+      content <- parsed_event$data
       self$value <- paste0(self$value, content)
 
       if (!is.null(self$shinySession)) {

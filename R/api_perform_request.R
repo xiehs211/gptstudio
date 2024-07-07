@@ -70,12 +70,11 @@ gptstudio_request_perform.gptstudio_request_openai <- function(skeleton, ...,
 
     response <- stream_handler$value
   } else {
-    #response_json <- request %>%
-    #  req_perform() %>%
-    #  resp_body_json()
+    response_json <- request %>%
+      req_perform() %>%
+      resp_body_json()
 
-    #response <- response_json$choices[[1]]$message$content
-    response <- request
+    response <- response_json$choices[[1]]$message$content
   }
   # return value
   structure(
